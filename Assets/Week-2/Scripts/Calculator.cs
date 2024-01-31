@@ -5,74 +5,71 @@ using System.Runtime.CompilerServices;
 
 public class Calculator : MonoBehaviour
 {
-    //TODO: Create a TextMeshProUGUI variable here and assign it in the inspector
+    //
+    //Properties
+    //
+
+    //This TextMeshProUGUI variable is how we interact with the OutputLabel in the interface
     public TextMeshProUGUI label;
 
-    //TODO: Create a temporary float variable here called prevInput so we can store the previous input value
-    //      when performaing calculations
-    public float prevInput;
+    //Stores the previous input for calculations
+    private float prevInput;
 
-    //TODO: Create a bool variable called clearPrevInput here so we can flip it to true/false if we should clear the prior input
-    //      when typing in values. Example, if we type in the value 402 and then press the + button, the next value I enter
-    //      should replace the 402 I previously entered
-    public bool clearPrevInput = false;
+    //Tells us when to start clearing the numbers in the label
+    private bool clearPrevInput = false;
 
-    //TODO: Leave this alone
+    //Variable for later when we find out what type of equation the person wants
     private EquationType equationType;
+
+    //
+    //Methods
+    //
 
     private void Start()
     {
+        //Starts up by clearing
         Clear();
     }
 
     public void AddInput(string input)
     {
-        //TODO: Check the clearPrevInput variable you created
-        //      and if true then set the current value of the text label to be string.Empty
-        //      and set the clearPrevInput value to false
+        //Clears the label when clearPrevInput is true
         if (clearPrevInput == true) 
         {
             label.text = string.Empty;
             clearPrevInput = false;
         }
 
-        //TODO: Add the input passed into the AddInput function to the current value of the label
-        //      Hint. You can perform the + operations on string data to combine them
         label.text += input;
     }
 
     public void SetEquationAsAdd()
     {
-        //TODO: Store the current input value on the text label into the float variable you created.
-        //      Hint. You will need to google float.Parse() and pass in the string value of the label.
-        //TODO: Set the bool you made to true so that the next number that gets typed in clears the calculator display.
+        //Sets the EquationType as Add and stores the prevInput for later
         prevInput = float.Parse(label.text);
         clearPrevInput = true;
         equationType = EquationType.ADD;
     }
 
-    //TODO: Create a SetEquationAsSubtract function similar to SetEquationAsAdd.
-    //      Make sure you set equationType to EquationType.SUBTRACT
     public void SetEquationAsSubtract()
     {
+        //Sets the EquationType as Subtract and stores the prevInput for later
         prevInput = float.Parse(label.text);
         clearPrevInput = true;
         equationType = EquationType.SUBTRACT;
     }
 
-    //TODO: Create a SetEquationAsMultiply function similar to SetEquationAsAdd.
-    //      Make sure you set equationType to EquationType.Multiply
     public void SetEquationAsMultiply() 
     {
+        //Sets the EquationType as Multiply and stores the prevInput for later
         prevInput = float.Parse(label.text);
         clearPrevInput = true;
         equationType = EquationType.MULTIPLY;
     }
 
-    //TODO: Create a SetEquationAsDivide function similar to SetEquationAsAdd.
-    //      Make sure you set equationType to EquationType.DIVIDE
     public void SetEquationAsDivide() 
     {
+        //Sets the EquationType as Divide and stores the prevInput for later
         prevInput = float.Parse(label.text);
         clearPrevInput = true;
         equationType = EquationType.DIVIDE;
@@ -80,67 +77,64 @@ public class Calculator : MonoBehaviour
 
     public void Add()
     {
-        //TODO: Calculate the sum of the float variable that stores the previous input value and the current input value
-        //      Set the text label to display that sum
+        //Just adds the numbers together and puts in label
         float currentInput;
         float output;
         currentInput = float.Parse(label.text);
         output = prevInput + currentInput;
         label.text = $"{output}";
+
+        clearPrevInput = true;
     }
 
-    //TODO: Implement Subtract function
     public void Subtract() 
     {
+        //Just subtracts the numbers together and puts in label
         float currentInput;
         float output;
         currentInput = float.Parse(label.text);
         output = prevInput - currentInput;
         label.text = $"{output}";
+
+        clearPrevInput = true;
     }
 
-    //TODO: Implement Multiply function
     public void Multiply()
     {
+        //Just multiplies the numbers together and puts in label
         float currentInput;
         float output;
         currentInput = float.Parse(label.text);
         output = prevInput * currentInput;
         label.text = $"{output}";
+
+        clearPrevInput = true;
     }
 
-    //TODO: Implement Divide function
     public void Divide()
     {
+        //Just divides the numbers together and puts in label
         float currentInput;
         float output;
         currentInput = float.Parse(label.text);
         output = prevInput / currentInput;
         label.text = $"{output}";
+
+        clearPrevInput = true;
     }
 
     public void Clear()
     {
-        //TODO: Reset the state of your calculator... reset the display value to a 0, reset the bool variable
-        //      that represents if the display should be cleared to true, reset the temporary float variable as well to 0
-
+        //Resets the calculator when C Button is pressed
         label.text = "0";
         prevInput = 0;
         clearPrevInput = true;
-
-
-        //TODO: Leave this alone
         equationType = EquationType.None;        
     }
 
     public void Calculate()
     {
-        //TODO: Check if equationTypep is Add/Subtract/Multiply/Divide and call the correct function
-        //
-        //
-        //if (equationType == EquationType.ADD) Add();
-
-
+        //Calls the method that does the math depending on which equation the person chose
         switch (equationType) 
         {
             case EquationType.ADD:
@@ -159,7 +153,6 @@ public class Calculator : MonoBehaviour
         }
     }
 
-    //TODO: Leave this alone
     public enum EquationType
     {
         None = 0,
