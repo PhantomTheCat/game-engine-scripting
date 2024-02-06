@@ -39,15 +39,20 @@ public class ArrayCode : MonoBehaviour
         }*/
 
 
+        int numberofRows = scoresArray.GetLength(0);
+        int numberofColumns = scoresArray.GetLength(1);
 
         //For each nested array in our array
-        for (int i = 0; i < scoresArray.Length; i++)
+        //Looking at first layer
+        for (int i = 0; i < numberofRows; i++)
         {
-            for (int j = 0; j < scoresArray[i].Length; j++)
+            //Looking at each nested array (2nd layer/dimension)
+            for (int j = 0; j < numberofColumns; j++)
             {
                 Debug.LogFormat("The number is {0}", scoresArray[i][j]);
             }
         }
+
 
     }
 
