@@ -11,24 +11,36 @@ namespace Week4
 {
     public class Player : MonoBehaviour
     {
+
         //Properties
-
-        /*
-        public int health
-        {
-            //Will get the maxHealth as starting value
-            get { return maxHealth; }
-            //Will limit who can set the value of health, with this case only being player who can do it
-            private set { maxHealth = value; }
-        }
-        */
-
         [SerializeField] private int health = 10;
         public int attackDamage = 10;
         public int maxHealth = 10;
 
 
+        /*
+        [SerializeField] AudioClip attackSound;
+        [SerializeField] AudioClip damageSound;
+        private AudioSource audio;
+        */
+
+
+        /*public int health
+        {
+            //Will get the maxHealth as starting value
+            get { return maxHealth; }
+            //Will limit who can set the value of health, with this case only being player who can do it
+            private set { maxHealth = value; }
+        }*/
+
+
+
         //Methods
+        private void Awake()
+        {
+            //audio = GetComponent<AudioSource>();
+        }
+
         public void DamagePlayer(int amount)
         {
             health -= amount;
@@ -36,15 +48,18 @@ namespace Week4
 
         public Enemy FindNewTarget()
         {
-            //Will return only the enemy at the top of the list
-            //return GameObject.FindAnyObjectByType<Enemy>();
-
 
             //Randomizes the enemy returned
             Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
             int randomIndex = Random.Range(0, enemies.Length);
             return enemies[randomIndex];
-            
+
+            //Can also find objects via tags if they have one attached
+            //GameObject.FindGameObjectsWithTag("Enemy");
+
+
+            //Will return only the enemy at the top of the list
+            //return GameObject.FindAnyObjectByType<Enemy>();
 
 
             ////Can also find the object and its related C# Script component
@@ -58,6 +73,14 @@ namespace Week4
         {
             Enemy target = FindNewTarget();
             target.DamageEnemy(attackDamage);
+
+
+            //Plays our static method from the AudioManager script using the enum we set up there
+            AudioManager.PlaySound(AudioManager.SoundType.ATTACK);
+
+
+            //Plays it once
+            //GetComponent<AudioSource>().PlayOneShot(attackSound);
         }
 
     }
