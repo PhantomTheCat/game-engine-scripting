@@ -5,25 +5,25 @@ using UnityEngine;
 public class SoundEffect : MonoBehaviour
 {
     //Properties
-    AudioSource audio;
+    AudioSource soundAudio;
     private bool didPlay;
 
 
     //Methods
     private void Awake()
     {
-        audio = GetComponent<AudioSource>();
+        soundAudio = GetComponent<AudioSource>();
     }
 
     public void Initialize(AudioClip clip) //Teacher recommended Init as an alternative name
     {
-        audio.clip = clip;
+        soundAudio.clip = clip;
         Play();
     }
 
     public void Play()
     {
-        audio.Play();
+        soundAudio.Play();
     }
 
     private void Update()
@@ -31,7 +31,7 @@ public class SoundEffect : MonoBehaviour
         //Checking if didPlay is false
         //Then checking if the audio is playing to destroy the gameObject
         if(didPlay == false) return;
-        if (audio.isPlaying == false) Destroy(gameObject);
+        if (soundAudio.isPlaying == false) Destroy(gameObject);
     }
 
 }
