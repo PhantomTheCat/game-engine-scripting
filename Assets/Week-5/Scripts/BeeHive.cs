@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Week5;
 
@@ -8,6 +9,9 @@ namespace Week5
     public class BeeHive : MonoBehaviour
     {
         //Properties
+        [SerializeField] private TextMeshProUGUI honeyText;
+        [SerializeField] private TextMeshProUGUI nectarText;
+        [SerializeField] private TextMeshProUGUI beeText;
         public GameObject beePrefab;
         [SerializeField] private float nectarProductionRate = 5.0f;
         [SerializeField] private int numberOfBees = 2;
@@ -57,6 +61,7 @@ namespace Week5
 
             //Increment our nectar amount
             nectarAmount++;
+            UpdateAmountText();
 
             //No need to reset or continue the timer
             //as it constantly goes as long as we have nectar
@@ -82,6 +87,7 @@ namespace Week5
             //Produces a honey and removes a nectar
             honeyAmount++;
             nectarAmount--;
+            UpdateAmountText();
 
             //For Extra Credit: Will Make another bee with honey available
             if (honeyAmount >= beeCostUsingHoney)
@@ -92,6 +98,7 @@ namespace Week5
 
                 //Removes the honey that was used
                 honeyAmount -= beeCostUsingHoney;
+                UpdateAmountText();
             }
         }
 
@@ -105,6 +112,14 @@ namespace Week5
 
             //Using that component to say that this GameObject's beeHive is this instance of beeHive
             bee.Init(this);
+        }
+
+        void UpdateAmountText()
+        {
+            //Being added on by the other instances of this class that have different values
+            honeyText.text = $"Honey Amount: {honeyAmount}";
+            nectarText.text = $"Nectar Amount: {nectarAmount}";
+            beeText.text = $"Bees = {numberOfBees}";
         }
     }
 }

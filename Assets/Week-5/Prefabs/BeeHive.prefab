@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7678569641931464349}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.26, y: -2.96, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.052339, y: -2.9986274, z: 0.9358578}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -97,6 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e520dc218b0ab314dab76ffa43bd59be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  honeyText: {fileID: 0}
+  nectarText: {fileID: 0}
   beePrefab: {fileID: 2195644061412503741, guid: 8f10a519f156877429219e2edc5dac1d, type: 3}
   nectarProductionRate: 5
   numberOfBees: 2
