@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class SoundEffect : MonoBehaviour
 {
-    AudioSource audio;
+    AudioSource audioSource;
 
     private bool didPlay;
 
     private void Awake()
     {
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void Init(AudioClip clip)
     {
-        audio.clip = clip;
+        audioSource.clip = clip;
     }
 
     public void Play()
     {
-        audio.Play();
+        audioSource.Play();
         didPlay = true;
     }
 
@@ -38,6 +38,6 @@ public class SoundEffect : MonoBehaviour
     void Update()
     {
         if (didPlay == false) return;
-        if (audio.isPlaying == false) Destroy(gameObject);
+        if (audioSource.isPlaying == false) Destroy(gameObject);
     }
 }
