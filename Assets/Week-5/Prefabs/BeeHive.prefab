@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   honeyText: {fileID: 0}
   nectarText: {fileID: 0}
+  beeText: {fileID: 0}
   beePrefab: {fileID: 2195644061412503741, guid: 8f10a519f156877429219e2edc5dac1d, type: 3}
   nectarProductionRate: 5
   numberOfBees: 2

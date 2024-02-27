@@ -4,34 +4,40 @@ using UnityEngine;
 
 public class SoundEffect : MonoBehaviour
 {
-    //Properties
-    AudioSource soundAudio;
+    AudioSource audio;
+
     private bool didPlay;
 
-
-    //Methods
     private void Awake()
     {
-        soundAudio = GetComponent<AudioSource>();
+        audio = GetComponent<AudioSource>();
     }
 
-    public void Initialize(AudioClip clip) //Teacher recommended Init as an alternative name
+    public void Init(AudioClip clip)
     {
-        soundAudio.clip = clip;
-        Play();
+        audio.clip = clip;
     }
 
     public void Play()
     {
-        soundAudio.Play();
+        audio.Play();
+        didPlay = true;
     }
 
-    private void Update()
+
+    /// <summary>
+    /// Changes the volume of the currently playing audio clip
+    /// </summary>
+    /// <param name="val">Has a range of 0 to 1</param>
+    public void SetVolume(float val)
     {
-        //Checking if didPlay is false
-        //Then checking if the audio is playing to destroy the gameObject
-        if(didPlay == false) return;
-        if (soundAudio.isPlaying == false) Destroy(gameObject);
+
     }
 
+    // Update is called once per frame
+    void Update()
+    {
+        if (didPlay == false) return;
+        if (audio.isPlaying == false) Destroy(gameObject);
+    }
 }
