@@ -6,6 +6,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
+//Code gotten from our In-Class Demo
+
+
 namespace Week6
 {
     public class PlayerController : MonoBehaviour
@@ -89,8 +92,11 @@ namespace Week6
         {
             //This method name needs to be same as one in the mappings inspector
 
-            //Making player jump (Adding force to go up)
-            rigidBody.AddForce(Vector3.up * jumpForce);
+            //Making player jump if they are on the ground(Adding force to go up)
+            if (IsGrounded())
+            {
+                rigidBody.AddForce(Vector3.up * jumpForce);
+            }
         }
 
         bool IsGrounded()

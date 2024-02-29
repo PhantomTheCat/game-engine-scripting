@@ -31,7 +31,7 @@ namespace Week4
         [SerializeField] private int health = 10;
         [SerializeField]
         //[Multiline(10)]
-        private string name;
+        private string playerName;
 
 
         public void Damage(int amt)
