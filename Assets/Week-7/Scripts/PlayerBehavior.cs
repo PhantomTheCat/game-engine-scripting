@@ -10,19 +10,35 @@ namespace MazeGame
         //Properties
         [SerializeField] private TextMeshProUGUI damagedText;
         [SerializeField] private TextMeshProUGUI loserText;
+        [SerializeField] private GameObject resetText;
+        private Vector3 startingPosition;
         public int health = 100;
-        public int maxHealth = 100;
+        private int maxHealth = 100;
         public int numberOfKeys = 0;
         public int coinCount = 0;
 
 
         //Methods
+        private void Awake()
+        {
+            startingPosition = transform.position;
+            MazeGameManager.resetGameEvent += ResetPlayer;
+        }
+
         private void Update()
         {
             if (CheckIfDead())
             {
                 //If player is dead, end the game (In our case, display the death message)
                 loserText.gameObject.SetActive(true);
+                resetText.gameObject.SetActive(true);
+
+
+                //Resetting the game if they choose
+                if (Input.GetKey(KeyCode.E))
+                {
+                    MazeGameManager.resetGameEvent();
+                }
             }
         }
 
@@ -30,12 +46,12 @@ namespace MazeGame
         {
             if (other.gameObject.tag == "Key")
             {
-                Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
                 numberOfKeys++;
             }
             if (other.gameObject.tag == "Coin")
             {
-                Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
                 coinCount++;
             }
         }
@@ -46,10 +62,10 @@ namespace MazeGame
             health -= amountDamaged;
 
             //Will turn it off after a few seconds
-            Invoke("TurnOffText", 2f);
+            Invoke("TurnOffDamageText", 2f);
         }
 
-        private void TurnOffText()
+        private void TurnOffDamageText()
         {
             damagedText.gameObject.SetActive(false);
         }
@@ -64,6 +80,15 @@ namespace MazeGame
             {
                 return false;
             }
+        }
+
+        private void ResetPlayer()
+        {
+            //Reseting defaults to player
+            health = maxHealth;
+            numberOfKeys = 0;
+            coinCount = 0;
+            transform.position = startingPosition;
         }
     }
 }

@@ -2,19 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowTrapBehavior : MonoBehaviour
+namespace MazeGame
 {
-    //Properties
-    [SerializeField] private GameObject arrowPrefab;
-    [SerializeField] private Transform arrowSpawnTransform;
-
-
-    //Methods
-    private void OnTriggerEnter(Collider other)
+    public class ArrowTrapBehavior : MonoBehaviour
     {
-        if (other.gameObject.tag == "Player")
+        //Properties
+        [SerializeField] private GameObject arrowPrefab;
+        [SerializeField] private Transform arrowSpawnTransform;
+
+
+        //Methods
+        private void OnTriggerEnter(Collider other)
         {
-            Instantiate(arrowPrefab, arrowSpawnTransform.position, this.transform.rotation);
+            if (other.gameObject.tag == "Player")
+            {
+                Instantiate(arrowPrefab, arrowSpawnTransform.position, this.transform.rotation);
+            }
         }
     }
 }
+

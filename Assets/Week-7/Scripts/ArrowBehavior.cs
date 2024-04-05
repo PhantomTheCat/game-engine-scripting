@@ -1,38 +1,41 @@
-using MazeGame;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Week7;
 
-public class ArrowBehavior : MonoBehaviour
+namespace MazeGame
 {
-    //Properties
-    [SerializeField] private float speed;
-    [SerializeField] private int damage = 20;
-    [SerializeField] private float timeDelayBeforeDestroy = 10f;
-
-
-    //Methods
-    private void Awake()
+    public class ArrowBehavior : MonoBehaviour
     {
-        //Destroys themself after period of time
-        Destroy(gameObject, timeDelayBeforeDestroy);
-    }
+        //Properties
+        [SerializeField] private float speed;
+        [SerializeField] private int damage = 20;
+        [SerializeField] private float timeDelayBeforeDestroy = 10f;
 
-    void Update()
-    {
-        //Moving it move forward
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Destroy(gameObject);
-
-        if (other.transform.name == "Player")
+        //Methods
+        private void Awake()
         {
-            PlayerBehavior player = other.GetComponent<PlayerBehavior>();
-            player.DamagePlayer(damage);
+            //Destroys themself after period of time
+            Destroy(gameObject, timeDelayBeforeDestroy);
+        }
+
+        void Update()
+        {
+            //Moving it move forward
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            Destroy(gameObject);
+
+            if (other.transform.name == "Player")
+            {
+                PlayerBehavior player = other.GetComponent<PlayerBehavior>();
+                player.DamagePlayer(damage);
+            }
         }
     }
 }
+

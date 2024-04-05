@@ -1,33 +1,35 @@
-using MazeGame;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class InterfaceManagerBehavior : MonoBehaviour
+namespace MazeGame
 {
-    //Properties
-    [SerializeField] private GameObject playerObject;
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI healthText;
-    [SerializeField] private TextMeshProUGUI keyText;
-    private PlayerBehavior player;
-
-    //Methods
-    void Awake()
+    public class InterfaceManagerBehavior : MonoBehaviour
     {
-        player = playerObject.GetComponent<PlayerBehavior>();
-    }
+        //Properties
+        [SerializeField] private GameObject playerObject;
+        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private TextMeshProUGUI healthText;
+        [SerializeField] private TextMeshProUGUI keyText;
+        private PlayerBehavior player;
 
-    void Update()
-    {
-        UpdateText();
-    }
+        //Methods
+        void Awake()
+        {
+            player = playerObject.GetComponent<PlayerBehavior>();
+        }
 
-    void UpdateText()
-    {
-        scoreText.text = $"# of Coins: {player.coinCount}";
-        healthText.text = $"Health: {player.health}";
-        keyText.text = $"# of Keys: {player.numberOfKeys}";
+        void Update()
+        {
+            UpdateText();
+        }
+
+        void UpdateText()
+        {
+            scoreText.text = $"# of Coins: {player.coinCount}";
+            healthText.text = $"Health: {player.health}";
+            keyText.text = $"# of Keys: {player.numberOfKeys}";
+        }
     }
 }
