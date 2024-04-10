@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Week-12/Scenes/SavingDataDemo.unity
+    guid: 49a3ed2c96ab0594188d0ba6e0522d64
+  - enabled: 1
+    path: Assets/Week-12/Scenes/Game.unity
+    guid: f59502be5db595e4593b753b3f76dadf
   m_configObjects: {}
