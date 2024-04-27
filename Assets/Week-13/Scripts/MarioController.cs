@@ -4,77 +4,81 @@ using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MarioController : MonoBehaviour
+namespace Week13
 {
-    //Properties
-    [SerializeField] private float jumpForce = 5f;
-    [SerializeField] private const float speed = 5.5f;
-    private InputAction moveAction;
-    private InputAction jumpAction;
-    private InputAction crouchAction;
-    private MarioControls mappings;
-    private Animator animator;
-    private Rigidbody rigidBody;
-
-
-    //Methods
-    private void Awake()
+    public class MarioController : MonoBehaviour
     {
-        mappings = new MarioControls();
-        rigidBody = GetComponent<Rigidbody>();
-        animator = GetComponent<Animator>();
+        //Properties
+        [SerializeField] private float jumpForce = 5f;
+        [SerializeField] private const float speed = 5.5f;
+        private InputAction moveAction;
+        private InputAction jumpAction;
+        private InputAction crouchAction;
+        private MarioControls mappings;
+        private Animator animator;
+        private Rigidbody rigidBody;
 
 
-        moveAction = mappings.Movement.Move;
-        jumpAction = mappings.Movement.Jump;
-        crouchAction = mappings.Movement.Crouch;
-    }
+        //Methods
+        private void Awake()
+        {
+            mappings = new MarioControls();
+            rigidBody = GetComponent<Rigidbody>();
+            animator = GetComponent<Animator>();
 
-    private void OnEnable()
-    {
-        moveAction.Enable();
-        jumpAction.Enable();
-        crouchAction.Enable();
 
-        jumpAction.performed += Jump;
-        crouchAction.performed += Crouch; 
-    }
+            moveAction = mappings.Movement.Move;
+            jumpAction = mappings.Movement.Jump;
+            crouchAction = mappings.Movement.Crouch;
+        }
 
-    private void OnDisable()
-    {
-        moveAction.Disable();
-        jumpAction.Disable();
-        crouchAction.Disable();
-    }
+        private void OnEnable()
+        {
+            moveAction.Enable();
+            jumpAction.Enable();
+            crouchAction.Enable();
 
-    private void FixedUpdate()
-    {
-        HandleMovement();
-    }
+            jumpAction.performed += Jump;
+            crouchAction.performed += Crouch;
+        }
 
-    private void HandleMovement()
-    {
-        float axis = moveAction.ReadValue<float>();
+        private void OnDisable()
+        {
+            moveAction.Disable();
+            jumpAction.Disable();
+            crouchAction.Disable();
+        }
 
-        Vector3 input = (axis * transform.right);
+        private void FixedUpdate()
+        {
+            HandleMovement();
+        }
 
-        input *= speed;
+        private void HandleMovement()
+        {
+            float axis = moveAction.ReadValue<float>();
 
-        rigidBody.velocity = new Vector3(input.x, 0, 0);
+            Vector3 input = (axis * transform.right);
 
-        animator.SetFloat("Speed", input.x);
-    }
+            input *= speed;
 
-    private void Jump(InputAction.CallbackContext context)
-    {
-        //Triggering the jump and animation
-        animator.SetTrigger("Jump");
-        rigidBody.AddForce(Vector3.up * jumpForce);
-    }
+            rigidBody.velocity = new Vector3(input.x, 0, 0);
 
-    private void Crouch(InputAction.CallbackContext context)
-    {
-        //Triggering the animation
-        animator.SetTrigger("Crouch");
+            animator.SetFloat("Speed", input.x);
+        }
+
+        private void Jump(InputAction.CallbackContext context)
+        {
+            //Triggering the jump and animation
+            animator.SetTrigger("Jump");
+            rigidBody.AddForce(Vector3.up * jumpForce);
+        }
+
+        private void Crouch(InputAction.CallbackContext context)
+        {
+            //Triggering the animation
+            animator.SetTrigger("Crouch");
+        }
     }
 }
+
